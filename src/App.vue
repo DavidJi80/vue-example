@@ -7,22 +7,46 @@
       <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
       <router-link to="./foo">Go to Foo</router-link>
       <router-link to="./bar">Go to Bar</router-link>
+      <button @click="fn1">首页</button>
+      <router-link :to="'/user/' + userId" tag="button">路由参数</router-link>
+      <!-- 查询串数据 -->
+      <button @click="fn2">URL参数1</button>
+      <router-link :to="{ path: '/user', query: { name: 'laowang', age: 18 } }" tag="button">URL参数2</router-link>
     </p>
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+  data() {
+    return {
+      userId: "Amy",
+    };
+  },
+  methods: {
+    fn1: function () {
+      this.$router.push("/foo");
+    },
+    fn2: function () {
+      this.$router.push({
+        path: "/user",
+        query: {
+          name: "david",
+          age: 20,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
